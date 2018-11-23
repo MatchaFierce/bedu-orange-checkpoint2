@@ -72,9 +72,6 @@ class Users extends Component {
           </tbody>
         </Table>
 
-				{console.log(this.state)}
-				{/* <input value={ this.props.user.nombre } onChange={ this.changeName } />*/}
-
 			</div>
 		);
 	}

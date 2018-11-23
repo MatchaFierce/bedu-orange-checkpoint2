@@ -54,16 +54,11 @@ class Dependents extends Component {
           </tbody>
         </table>
 
-
-
-				<input value={ this.props.dependent.nombre_completo } onChange={ this.changeName } />
-				<ul>
 				{ this.props.error }
 
 				{ (this.props.loading) ? <Preloader size='big'/> : '' }
 
 				{ this.desplegar() }
-				</ul>
 			</div>
 		);
 	}
