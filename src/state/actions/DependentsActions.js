@@ -1,53 +1,99 @@
 import axios from 'axios';
-export const GET_DEPENDENTS = "GET_DEPENDENTS";
-export const GET_DEPENDENTS_SUCCESS = "GET_DEPENDENTS_SUCCESS";
-export const GET_DEPENDENTS_ERROR = "GET_DEPENDENTS_ERROR";
-export const LOADING_DEPENDENTS = "LOADING_DEPENDENTS";
 
 
-const GetDependents = () => {
-  return async (dispatch) => {
-    dispatch(LoadingDependents())
-    try {
-      const response = await axios.get(" http://checkpoint2-grupo3.herokuapp.com/api/dependientes/orange");
-      console.log(response);
-      dispatch(SuccessGettingDependents(response.data.data));
-    } catch (e) {
-      dispatch(ErrorGettingDependents());
-    }
+export const getDependents = () => async (dispatch) => {
+  dispatch({ type: 'GET_DEPENDENTS' });
+
+  try {
+    const res = await axios.get(' https://checkpoint2-grupo3.herokuapp.com/api/dependientes/orange');
+    dispatch({
+      type: 'GET_DEPENDENTS_SUCCESS',
+      payload: res.data
+    });
+  }
+
+  catch (err) {
+    dispatch({
+      type: 'GET_DEPENDENTS_ERROR',
+      payload: err.message
+    });
   }
 };
 
 
-/**
- * [SuccessGettingDEPENDANTS description]
- * @param {[type]} dependants [description]
- */
-const SuccessGettingDependents = (dependents) => ({
-  type: GET_DEPENDENTS_SUCCESS,
-  dependents
-});
+export const getDependent = (key) => async (dispatch) => {
+  dispatch({ type: 'GET_DEPENDENT' });
+
+  try {
+    const res = await axios.get(`https://checkpoint2-grupo3.herokuapp.com/api/dependientes/orange/${key}`);
+    dispatch({
+      type: 'GET_DEPENDENT_SUCCESS',
+      payload: res.data
+    });
+  }
+
+  catch (err) {
+    dispatch({
+      type: 'GET_DEPENDENT_ERROR',
+      payload: err.message
+    });
+  }
+};
 
 
-/**
- * [ErrorGettingDEPENDANTS description]
- * @param {[type]} err [description]
- */
-const ErrorGettingDependents = (err) => ({
-  type: GET_DEPENDENTS_ERROR,
-  err
-})
+export const postDependent = (dependent) => async (dispatch) => {
+  dispatch({ type: 'POST_DEPENDENT' });
 
+  try {
+    const res = await axios.post('https://checkpoint2-grupo3.herokuapp.com/api/dependientes/orange/', dependent);
+    dispatch({
+      type: 'POST_DEPENDENT_SUCCESS',
+      payload: res.data
+    });
+  }
 
+  catch (err) {
+    dispatch({
+      type: 'POST_DEPENDENT_ERROR',
+      payload: err.message
+    });
+  }
+};
 
-const LoadingDependents = () => ({
-  type: LOADING_DEPENDENTS
-});
+export const updateDependent = (key) => async (dispatch) => {
+  dispatch({ type: 'UPDATE_DEPENDENT' });
 
+  try {
+    const res = await axios.update(`https://checkpoint2-grupo3.herokuapp.com/api/dependientes/orange/${key}`);
+    dispatch({
+      type: 'UPDATE_DEPENDENT_SUCCESS',
+      payload: res.data
+    });
+  }
 
-export {
-  GetDependents as getDependents,
-  SuccessGettingDependents as successGettingDependents,
-  ErrorGettingDependents as errorGettingDependents,
-  LoadingDependents as loadingDependents
+  catch (err) {
+    dispatch({
+      type: "UPDATE_DEPENDENT_ERROR",
+      payload: err.message
+    });
+  }
+};
+
+export const deleteDependent = (key) => async (dispatch) => {
+  dispatch({ type: 'DELETE_DEPENDENT' });
+
+  try {
+    const res = await axios.delete(`https://checkpoint2-grupo3.herokuapp.com/api/dependientes/orange/${key}`);
+    dispatch({
+      type: 'DELETE_DEPENDENT_SUCCESS',
+      payload: res.data
+    });
+  }
+
+  catch (err) {
+    dispatch({
+      type: 'DELETE_DEPENDENT_ERROR',
+      payload: err.message
+    });
+  }
 };

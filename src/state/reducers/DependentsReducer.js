@@ -1,72 +1,72 @@
-import { GET_DEPENDENTS_SUCCESS, GET_DEPENDENTS_ERROR, LOADING_DEPENDENTS } from './../actions/DependentsActions';
 
-
-/**
- * [initialState description]
- * @type {Object}
- */
-const initialState = {
-  dependants: [],
+const INITIAL_STATE = {
+  dependents: [],
+  dependent: {
+    nombre_completo: '',
+    dependencia: '',
+    edad: '',
+    _usuario: ''
+  },
   loading: false,
-  errorMessage: ""
+  error: '',
+  response: ''
 }
 
 
-/**
- * [DependantsReducer description]
- * @param {[type]} [state=initialState] [description]
- * @param {[type]} action               [description]
- */
-const DependantsReducer = (state = initialState, action) => {
+export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case GET_DEPENDENTS_SUCCESS:
+
+    case "GET_USERS":
       return {
         ...state,
-        loading: false,
-        dependants: action.dependants
-      }
+        error: '',
+        loading: true
+      };
 
-
-    case GET_DEPENDENTS_ERROR:
+    case "GET_DEPENDENTS_SUCCESS":
       return {
         ...state,
-        loading: false,
-        errorMessage: action.error
+        error: '',
+        loading: '',
+        dependents: action.payload
+      };
+
+    case "GET_DEPENDENTS_ERROR":
+      return {
+        ...state,
+        error: action.payload,
+        loading: false
+      };
+
+    case "DELETE_DEPENDENT":
+      return {
+        ...state,
+        error: '',
+        loading: true
+      };
+
+    case "DELETE_DEPENDENT_SUCCESS":
+      return {
+        ...state,
+        error: '',
+        loading: '',
+        response: action.payload
+      };
+
+    case "DELETE_DEPENDENT_ERROR":
+      return {
+        ...state,
+        error: action.payload,
+        loading: false
       }
 
-      case LOADING_DEPENDENTS:
-        return {
-          ...state,
-          loading: true
-        }
-
-    // case GET_DEPENDENT:
-    //   break;
-    //
-    // case POST_DEPENDENT:
-    //   return state.concat([action.data]);
-    //
-    // case UPDATE_DEPENDANT:
-    //   return state.map((dependant) => {
-    //     if (dependant.id === action.id) {
-    //       return {
-    //         ...dependant,
-    //         name: action.data.newName,
-    //         fatherName: action.data.newFatherName,
-    //         motherName: action.data.newMotherName,
-    //       }
-    //     } else return dependant;
-    //   })
-
-
-    // case DELETE_DEPENDANT:
-    //   return state.filter((dependant) => dependant.id !== action.id)
-
+    case "CHANGE_INPUT":
+      return {
+        ...state,
+        input: action.payload
+      };
 
     default:
       return state;
   }
 }
-
-
-export default DependantsReducer;

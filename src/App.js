@@ -1,26 +1,25 @@
-import React, { Component } from 'react';
-import store from './state/store/store';
-import { Provider } from 'react-redux'
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter, Route } from 'react-router-dom';
+
+import Header from './components/Header';
+import Users from './components/Users';
+import Dependents from './components/Dependents';
+
 import './App.css';
 
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <Provider store={store}>
-          <BrowserRouter>
-            <Switch>
-              <Route exact path="" render={() => <h1>Estás en usuarios</h1>}></Route>
-              <Route path="/dependientes" render={() => <h1>Estás en dependientes</h1>}></Route>
-            </Switch>
-          </BrowserRouter>
-        </Provider>
+const App = (props) => (
+  <div className="App">
+    <BrowserRouter>
+      <div>
+        <Header />
+        <br />
+        <Route exact path='/usuarios' component={Users} />
+        <Route exact path='/dependientes' component={Dependents} />
       </div>
-    );
-  }
-}
+    </BrowserRouter>
+  </div>
+);
 
 
 export default App;

@@ -4,14 +4,14 @@ import logger from 'redux-logger';
 
 
 /* IMPORTING REDUCERS*/
-import UsersReducer from './../reducers/UsersReducer';
-import DependentsReducer from './../reducers/DependentsReducer';
+import usersReducer from './../reducers/usersReducer';
+import dependentsReducer from './../reducers/dependentsReducer';
 
 
 const store = createStore(combineReducers({
-  users: UsersReducer,
-  dependants: DependentsReducer
-}), applyMiddleware(thunk, logger));
+  usersReducer,
+  dependentsReducer
+}), {}, applyMiddleware(thunk, logger));
 
 
 export default store;

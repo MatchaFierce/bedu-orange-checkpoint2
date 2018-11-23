@@ -1,72 +1,67 @@
-import { GET_USERS_SUCCESS, GET_USERS_ERROR, LOADING_USERS } from './../actions/UsersActions';
+import {
+  GET_USERS, GET_USERS_SUCCESS, GET_USERS_ERROR,
+  GET_USER, GET_USER_SUCCESS, GET_USER_ERROR,
+  POST_USER, POST_USER_SUCCESS, POST_USER_ERROR,
+  UPDATE_USER, UPDATE_USER_SUCCESS, UPDATE_USER_ERROR,
+  DELETE_USER, DELETE_USER_SUCCESS, DELETE_USER_ERROR
+} from './../types/usersTypes';
 
 
-/**
- * [initialState description]
- * @type {Object}
- */
-const initialState = {
+const INITIAL_STATE = {
   users: [],
   loading: false,
-  errorMessage: ""
+  error: '',
+  response: ''
 }
 
 
-/**
- * [DependantsReducer description]
- * @param {[type]} [state=initialState] [description]
- * @param {[type]} action               [description]
- */
-const UsersReducer = (state = initialState, action) => {
+export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
+
+    case GET_USERS:
+      return {
+        ...state,
+        error: '',
+        loading: true
+      };
+
     case GET_USERS_SUCCESS:
       return {
         ...state,
-        loading: false,
-        users: action.users
-      }
-
+        error: '',
+        loading: '',
+        users: action.payload
+      };
 
     case GET_USERS_ERROR:
       return {
         ...state,
-        loading: false,
-        errorMessage: action.error
-      }
+        error: action.payload,
+        loading: false
+      };
 
-      case LOADING_USERS:
-        return {
-          ...state,
-          loading: true
-        }
+    case DELETE_USER:
+      return {
+        ...state,
+        error: '',
+        loading: true
+      };
 
-    // case GET_DEPENDENT:
-    //   break;
-    //
-    // case POST_DEPENDENT:
-    //   return state.concat([action.data]);
-    //
-    // case UPDATE_DEPENDANT:
-    //   return state.map((dependant) => {
-    //     if (dependant.id === action.id) {
-    //       return {
-    //         ...dependant,
-    //         name: action.data.newName,
-    //         fatherName: action.data.newFatherName,
-    //         motherName: action.data.newMotherName,
-    //       }
-    //     } else return dependant;
-    //   })
+    case DELETE_USER_SUCCESS:
+      return {
+        ...state,
+        error: '',
+        loading: ''
+      };
 
-
-    // case DELETE_DEPENDANT:
-    //   return state.filter((dependant) => dependant.id !== action.id)
-
+    case DELETE_USER_ERROR:
+      return {
+        ...state,
+        error: action.payload,
+        loading: false
+      };
 
     default:
       return state;
   }
 }
-
-
-export default UsersReducer;
