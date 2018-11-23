@@ -1,0 +1,24 @@
+/* GET all */
+export const GET_USERS = "GET_USERS";
+export const GET_USERS_SUCCESS = "GET_USERS_SUCCESS";
+export const GET_USERS_ERROR = "GET_USERS_ERROR";
+
+/* GET one */
+export const GET_USER = "GET_USER";
+export const GET_USER_SUCCESS = "GET_USER_SUCCESS";
+export const GET_USER_ERROR = "GET_USER_ERROR";
+
+/* POST */
+export const POST_USER = "POST_USER";
+export const POST_USER_SUCCESS = "POST_USER_SUCCESS";
+export const POST_USER_ERROR = "POST_USER_ERROR";
+
+/* UPDATE */
+export const UPDATE_USER = "UPDATE_USER";
+export const UPDATE_USER_SUCCESS = "UPDATE_USER_SUCCESS";
+export const UPDATE_USER_ERROR = "UPDATE_USER_ERROR";
+
+/* DELETE */
+export const DELETE_USER = "DELETE_USER";
+export const DELETE_USER_SUCCESS = "DELETE_USER_SUCCESS";
+export const DELETE_USER_ERROR = "DELETE_USER_ERROR";
